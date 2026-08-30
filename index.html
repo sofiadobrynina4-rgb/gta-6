@@ -13,7 +13,7 @@
         }
 
         body {
-            background: #0b0b0e url("https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTPv7O5ACprNFjR4Ww93QrigMh3jeShlYAGTV76e9QOPl99kmR9") no-repeat center center fixed;
+            background: #0b0b0e url("https://media-rockstargames-com.akamaized.net/rockstargames-newsite/img/global/games/f382b/gta6_artwork_lucia_jason_1920x1080.jpg") no-repeat center center fixed;
             background-size: cover;
             position: relative;
             min-height: 100vh;
@@ -40,7 +40,7 @@
         .card {
             position: relative;
             z-index: 2;
-            background: rgba(14, 14, 20, 0.75);
+            background: rgba(14, 14, 20, 0.8);
             border: 1px solid rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
@@ -282,10 +282,11 @@
     </div>
 
     <script>
+        // Official media gallery wallpapers from Rockstar Games CDN
         const loadingBackgrounds = [
-            'https://gtavice.net/content/images/rockstar-games-official-jason-and-lucia-artwork-full.png',
-            'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTPv7O5ACprNFjR4Ww93QrigMh3jeShlYAGTV76e9QOPl99kmR9',
-            'https://i.redd.it/has-rockstar-been-secretly-revealing-gta-6s-loading-screens-v0-30d7ex9s5kih1.jpg'
+            'https://media-rockstargames-com.akamaized.net/rockstargames-newsite/img/global/games/f382b/gta6_artwork_lucia_jason_1920x1080.jpg',
+            'https://media-rockstargames-com.akamaized.net/rockstargames-newsite/img/global/games/f382b/gta6_artwork_lucia_1920x1080.jpg',
+            'https://media-rockstargames-com.akamaized.net/rockstargames-newsite/img/global/games/f382b/gta6_artwork_jason_1920x1080.jpg'
         ];
 
         const loadingHints = [
@@ -303,7 +304,7 @@
             let currentBgIndex = 0;
             loadingScreen.style.backgroundImage = `url('${loadingBackgrounds[0]}')`;
 
-            // Cycle loading screen background images like GTA 5/6
+            // Rotating background wallpaper slide
             const bgInterval = setInterval(() => {
                 currentBgIndex = (currentBgIndex + 1) % loadingBackgrounds.length;
                 loadingScreen.style.backgroundImage = `url('${loadingBackgrounds[currentBgIndex]}')`;
@@ -323,7 +324,6 @@
                     progressBar.style.width = percent + '%';
                 }
 
-                // Update hints and loading messages realistically
                 if (percent === 25) {
                     statusLabel.innerText = "Initializing Vice City World Engine...";
                     hintLabel.innerText = loadingHints[1];

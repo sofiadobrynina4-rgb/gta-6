@@ -13,8 +13,9 @@
         }
 
         body {
-            background: #0b0b0e;
-            background-image: radial-gradient(circle at 50% 0%, #2a0826 0%, #0b0b0e 70%);
+            background: #0b0b0e url("https://i.ytimg.com/vi/Wppy5saxPjg/maxresdefault.jpg") no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -25,25 +26,37 @@
             overflow: hidden;
         }
 
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(20, 10, 30, 0.45) 0%, rgba(5, 5, 10, 0.85) 100%);
+            z-index: 1;
+        }
+
         .card {
             position: relative;
             z-index: 2;
-            background: rgba(18, 18, 24, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(16px);
-            border-radius: 16px;
+            background: rgba(14, 14, 20, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
             padding: 40px;
             max-width: 480px;
             width: 100%;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 0, 128, 0.15);
             text-align: center;
         }
 
         .badge {
             display: inline-block;
-            background: rgba(255, 0, 128, 0.15);
+            background: rgba(255, 0, 128, 0.2);
             color: #ff3399;
-            border: 1px solid rgba(255, 0, 128, 0.3);
+            border: 1px solid rgba(255, 0, 128, 0.4);
             padding: 6px 14px;
             border-radius: 20px;
             font-size: 0.75rem;
@@ -51,10 +64,11 @@
             letter-spacing: 1.5px;
             text-transform: uppercase;
             margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(255, 0, 128, 0.2);
         }
 
         h1 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 800;
             letter-spacing: -0.5px;
             margin-bottom: 10px;
@@ -73,10 +87,10 @@
         .specs {
             display: flex;
             justify-content: space-around;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 14px;
             margin-bottom: 30px;
             font-size: 0.85rem;
             color: #d4d4d8;
@@ -84,25 +98,25 @@
 
         .download-btn {
             width: 100%;
-            background: linear-gradient(90deg, #ff007a 0%, #9900ff 100%);
+            background: linear-gradient(90deg, #ff007a 0%, #7928ca 100%);
             color: white;
             font-size: 1rem;
             font-weight: 700;
             padding: 16px;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
-            box-shadow: 0 4px 20px rgba(255, 0, 122, 0.3);
+            box-shadow: 0 4px 25px rgba(255, 0, 122, 0.4);
             transition: all 0.2s ease;
         }
 
         .download-btn:hover {
             opacity: 0.95;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 25px rgba(255, 0, 122, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 0, 122, 0.6);
         }
 
-        /* Fullscreen GTA 6 Loading Screen */
+        /* Fullscreen GTA 6 Loading Screen Overlay */
         #loading-screen {
             display: none;
             position: fixed;
@@ -110,9 +124,22 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: #050508;
-            background-image: radial-gradient(circle at 50% 50%, #1f0824 0%, #050508 100%);
+            background-color: #000;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
             z-index: 1000;
+            transition: background-image 0.8s ease-in-out;
+        }
+
+        #loading-screen::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.6) 100%);
         }
 
         .gta-logo {
@@ -146,6 +173,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
 
         .gta-status-row {
@@ -196,6 +224,7 @@
         .prank-reveal h2 {
             font-size: 2.2rem;
             margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(255, 0, 128, 0.5);
         }
 
         .prank-reveal p {
@@ -253,6 +282,12 @@
     </div>
 
     <script>
+        const loadingBackgrounds = [
+            "https://i.ytimg.com/vi/Wppy5saxPjg/maxresdefault.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3vZy3KpSR9MfRKNsncGBqu7LC9W3A_UQgwpy6pdf9YKUjOGxVtCvgI5s&s=10",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgyhoVVtbnN3sXPY2hVYj5BrpwE1_A8us45MFuBzvbticwMdximY4xP2WT&s=10"
+        ];
+
         const loadingHints = [
             "Tip: Vice City police units track vehicle descriptions across districts.",
             "Tip: Store heist payouts increase when managing heat with a getaway driver.",
@@ -262,7 +297,17 @@
 
         function startLoading() {
             document.getElementById('main-card').style.display = 'none';
-            document.getElementById('loading-screen').style.display = 'block';
+            const loadingScreen = document.getElementById('loading-screen');
+            loadingScreen.style.display = 'block';
+
+            let currentBgIndex = 0;
+            loadingScreen.style.backgroundImage = `url('${loadingBackgrounds[0]}')`;
+
+            // Rotate through concept loading wallpapers
+            const bgInterval = setInterval(() => {
+                currentBgIndex = (currentBgIndex + 1) % loadingBackgrounds.length;
+                loadingScreen.style.backgroundImage = `url('${loadingBackgrounds[currentBgIndex]}')`;
+            }, 3000);
 
             let percent = 0;
             const percentLabel = document.getElementById('gta-percent-label');
@@ -291,8 +336,9 @@
 
                 if (percent >= 100) {
                     clearInterval(percentInterval);
+                    clearInterval(bgInterval);
                     setTimeout(() => {
-                        document.getElementById('loading-screen').style.display = 'none';
+                        loadingScreen.style.display = 'none';
                         document.getElementById('main-card').style.display = 'block';
                         document.getElementById('landing-state').style.display = 'none';
                         document.getElementById('prank-state').style.display = 'block';

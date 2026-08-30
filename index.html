@@ -13,8 +13,9 @@
         }
 
         body {
-            background: #0b0b0e;
-            background-image: radial-gradient(circle at 50% 0%, #2a0826 0%, #0b0b0e 70%);
+            background: #0b0b0e url("https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTPv7O5ACprNFjR4Ww93QrigMh3jeShlYAGTV76e9QOPl99kmR9") no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -24,23 +25,38 @@
             padding: 20px;
         }
 
+        /* Dark glow overlay to enhance contrast and cool vibe */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(20, 10, 30, 0.45) 0%, rgba(5, 5, 10, 0.85) 100%);
+            z-index: 1;
+        }
+
         .card {
-            background: rgba(18, 18, 24, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(16px);
-            border-radius: 16px;
+            position: relative;
+            z-index: 2;
+            background: rgba(14, 14, 20, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
             padding: 40px;
             max-width: 480px;
             width: 100%;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 0, 128, 0.15);
             text-align: center;
         }
 
         .badge {
             display: inline-block;
-            background: rgba(255, 0, 128, 0.15);
+            background: rgba(255, 0, 128, 0.2);
             color: #ff3399;
-            border: 1px solid rgba(255, 0, 128, 0.3);
+            border: 1px solid rgba(255, 0, 128, 0.4);
             padding: 6px 14px;
             border-radius: 20px;
             font-size: 0.75rem;
@@ -48,10 +64,11 @@
             letter-spacing: 1.5px;
             text-transform: uppercase;
             margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(255, 0, 128, 0.2);
         }
 
         h1 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 800;
             letter-spacing: -0.5px;
             margin-bottom: 10px;
@@ -70,10 +87,10 @@
         .specs {
             display: flex;
             justify-content: space-around;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 14px;
             margin-bottom: 30px;
             font-size: 0.85rem;
             color: #d4d4d8;
@@ -81,22 +98,22 @@
 
         .download-btn {
             width: 100%;
-            background: linear-gradient(90deg, #ff007a 0%, #9900ff 100%);
+            background: linear-gradient(90deg, #ff007a 0%, #7928ca 100%);
             color: white;
             font-size: 1rem;
             font-weight: 700;
             padding: 16px;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
-            box-shadow: 0 4px 20px rgba(255, 0, 122, 0.3);
+            box-shadow: 0 4px 25px rgba(255, 0, 122, 0.4);
             transition: all 0.2s ease;
         }
 
         .download-btn:hover {
             opacity: 0.95;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 25px rgba(255, 0, 122, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 0, 122, 0.6);
         }
 
         /* Loading Screen */
@@ -114,9 +131,9 @@
 
         .progress-bar-container {
             width: 100%;
-            height: 8px;
+            height: 10px;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
+            border-radius: 5px;
             overflow: hidden;
             margin-bottom: 15px;
         }
@@ -124,8 +141,9 @@
         .progress-bar-fill {
             height: 100%;
             width: 0%;
-            background: linear-gradient(90deg, #ff007a, #9900ff);
-            transition: width 10s linear;
+            background: linear-gradient(90deg, #ff007a, #7928ca);
+            transition: width 0.1s linear;
+            box-shadow: 0 0 12px rgba(255, 0, 122, 0.8);
         }
 
         .sub-status {
@@ -142,6 +160,7 @@
         .prank-reveal h2 {
             font-size: 2.2rem;
             margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(255, 0, 128, 0.5);
         }
 
         .prank-reveal p {
@@ -194,19 +213,20 @@
             document.getElementById('landing-state').style.display = 'none';
             document.getElementById('loading-state').style.display = 'block';
 
-            // Smooth percentage counter
             let percent = 0;
             const percentLabel = document.getElementById('percent-label');
             const statusLabel = document.getElementById('status-label');
             const subStatus = document.getElementById('sub-status');
+            const progressBar = document.getElementById('progress');
 
             const percentInterval = setInterval(() => {
                 percent++;
+                
                 if (percent <= 100) {
                     percentLabel.innerText = percent + '%';
+                    progressBar.style.width = percent + '%';
                 }
 
-                // Dynamic realistic status updates
                 if (percent === 25) {
                     statusLabel.innerText = "Downloading game assets...";
                     subStatus.innerText = "Downloading chunk_01.bin (28 GB)...";
@@ -220,24 +240,14 @@
 
                 if (percent >= 100) {
                     clearInterval(percentInterval);
+                    setTimeout(() => {
+                        document.getElementById('loading-state').style.display = 'none';
+                        document.getElementById('prank-state').style.display = 'block';
+                    }, 500);
                 }
             }, 100);
-
-            // Progress bar animation
-            setTimeout(() => {
-                document.getElementById('progress').style.width = '100%';
-            }, 50);
-
-            // Reveal prank after 10 seconds
-            setTimeout(() => {
-                document.getElementById('loading-state').style.display = 'none';
-                document.getElementById('prank-state').style.display = 'block';
-            }, 10000);
         }
     </script>
 
 </body>
 </html>
-
-
-
